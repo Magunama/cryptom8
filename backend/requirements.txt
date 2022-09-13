@@ -1,0 +1,17 @@
+flask
+flask-sqlalchemy
+werkzeug
+sqlalchemy
+flask-cors
+binance-connector
+tensorflow
+keras
+pytest
+yfinance
+celery[redis]
+pandas
+numpy
+scikit-learn==1.1.0
+ta-lib
+matplotlib
+imblearn
