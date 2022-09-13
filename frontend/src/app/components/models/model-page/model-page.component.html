@@ -1,0 +1,32 @@
+<ng-template #modelCards>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <app-model-card *ngFor="let m of models"
+                    [model]="m"
+                    [dataSource]="dataSource"
+                    fxFlex="0 1 calc(33.3% - 32px)"
+                    fxFlex.lt-md="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%"
+                    (modelDeleted)="onModelDeleted($event)"
+                    (predictionDone)="onPredictionDone($event)"
+                    (trainingStarted)="onTrainingStarted($event)"
+    >
+    </app-model-card>
+  </div>
+</ng-template>
+
+<mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="onSelectedIndexChange($event)">
+  <mat-tab label="Binance">
+    <ng-template matTabContent>
+      <app-model-selector [symbols]="getModelSymbols()"></app-model-selector>
+      <ng-container [ngTemplateOutlet]="modelCards"></ng-container>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Yahoo Finance">
+    <ng-template matTabContent>
+      <app-model-selector [symbols]="getModelSymbols()"></app-model-selector>
+      <ng-container [ngTemplateOutlet]="modelCards"></ng-container>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+

@@ -1,0 +1,35 @@
+<mat-card class="model-card">
+  <mat-card-subtitle>
+    {{algorithmEnum[model.algorithm]}}
+  </mat-card-subtitle>
+  <mat-card-title>{{model.symbol_name}}</mat-card-title>
+  <mat-card-content>
+    <p *ngIf="model.predictions.length > 0; else noPredictions">{{getPredictionText()}}</p>
+    <ng-template #noPredictions><p>No predictions so far.</p></ng-template>
+    <p>Last action performed on: {{model.updated === null ? model.created : model.updated}}</p>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions align="end">
+    <button mat-button [disabled]="trainDisabled()" (click)="beforeTrainModel()">TRAIN</button>
+    <button mat-button
+            [disabled]="predictDisabled()" (click)="makePrediction()">PREDICT
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteModel()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <div class="footer-status">
+      Status: {{statusEnum[model.status]}}
+    </div>
+    <div [ngSwitch]="model.status">
+      <mat-progress-bar *ngSwitchCase="statusEnum.CREATED" color="accent" mode="determinate"
+                        value="100"></mat-progress-bar>
+      <mat-progress-bar *ngSwitchCase="statusEnum.IN_TRAINING" color="accent" mode="indeterminate"></mat-progress-bar>
+      <mat-progress-bar *ngSwitchCase="statusEnum.TRAINED" color="primary" mode="determinate"
+                        value="100"></mat-progress-bar>
+      <mat-progress-bar *ngSwitchCase="statusEnum.ERRORED" color="warn" mode="determinate"
+                        value="100"></mat-progress-bar>
+    </div>
+  </mat-card-footer>
+</mat-card>

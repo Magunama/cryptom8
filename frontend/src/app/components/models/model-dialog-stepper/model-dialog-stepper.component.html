@@ -1,0 +1,59 @@
+<ng-template #stepper>
+  <mat-stepper linear
+               class="models-stepper"
+               [orientation]="(stepperOrientation | async)!">
+
+    <!--    select data interval -->
+    <mat-step id="firstFormGroup" [stepControl]="firstFormGroup" label="Select data interval">
+      <form [formGroup]="firstFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <mat-date-range-input [rangePicker]="picker" [min]="data.start" [max]="data.end">
+            <input matStartDate placeholder="Start date" formControlName="start">
+            <input matEndDate placeholder="End date" formControlName="end">
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!--    select patience level-->
+    <mat-step [stepControl]="secondFormGroup" optional label="Select patience level">
+      <form [formGroup]="secondFormGroup">
+        <div class="patience-slider">
+          <mat-slider thumbLabel step="20" min="20" max="100" value="60" aria-label="units"
+                      (input)="patienceLevel = $event.value!"></mat-slider>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done. Click 'Submit' to confirm settings.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="onStepperSubmit()">Submit</button>
+      </div>
+      <p><strong>Note:</strong> If there are not enough resources available, your request will be placed in a queue.</p>
+    </mat-step>
+  </mat-stepper>
+</ng-template>
+
+
+<!--dialog logic is here-->
+<h1 mat-dialog-title>More details required</h1>
+<div mat-dialog-content>
+  <ng-container [ngTemplateOutlet]="stepper"></ng-container>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

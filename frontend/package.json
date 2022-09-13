@@ -1,0 +1,50 @@
+{
+  "name": "bachf",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve -o",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "build:stats": "ng build --stats-json",
+    "analyze": "webpack-bundle-analyzer dist/bachf/stats.json"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~14.0.0",
+    "@angular/cdk": "^14.0.1",
+    "@angular/common": "~14.0.0",
+    "@angular/compiler": "~14.0.0",
+    "@angular/core": "~14.0.0",
+    "@angular/flex-layout": "^13.0.0-beta.38",
+    "@angular/forms": "~14.0.0",
+    "@angular/material": "^14.0.1",
+    "@angular/platform-browser": "~14.0.0",
+    "@angular/platform-browser-dynamic": "~14.0.0",
+    "@angular/router": "~14.0.0",
+    "apexcharts": "^3.35.3",
+    "file-saver": "^2.0.5",
+    "ng-apexcharts": "^1.7.1",
+    "rxjs": "~7.5.5",
+    "tslib": "^2.4.0",
+    "zone.js": "~0.11.5"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~14.0.0",
+    "@angular/cli": "~14.0.0",
+    "@angular/compiler-cli": "~14.0.0",
+    "@types/file-saver": "^2.0.5",
+    "@types/jasmine": "~4.0.3",
+    "@types/node": "^17.0.41",
+    "jasmine-core": "~4.1.1",
+    "karma": "~6.3.20",
+    "karma-chrome-launcher": "~3.1.1",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.0.1",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "typescript": "~4.7.3",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-cli": "^4.9.2"
+  }
+}

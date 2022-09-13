@@ -1,0 +1,39 @@
+<h2>Select symbols to track</h2>
+<div class="example-button-container">
+    <button mat-icon-button [disabled]="refreshDisabled" (click)="refreshSymbols()">
+      <mat-icon aria-hidden="false" aria-label="Symbol refresh button">refresh</mat-icon>
+    </button>
+  <button mat-stroked-button (click)="saveSelectedSymbols()">Save</button>
+  <button mat-stroked-button (click)="symbolPicker.enable()">Edit</button>
+</div>
+
+<!--<p>-->
+<!--  <i>Select a focused chip by pressing <code>SPACE</code></i>-->
+<!--</p>-->
+
+<mat-form-field class="example-chip-list" appearance="fill">
+  <mat-label>Symbols</mat-label>
+  <mat-chip-list #chipList aria-label="Symbols" multiple [formControl]="symbolPicker">
+    <mat-chip
+      *ngFor="let keyword of getSelectedSymbolNames()"
+      [value]="keyword"
+      (removed)="removeKeyword(keyword)">
+      {{keyword}}
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <input
+      placeholder="New symbol..."
+      #symbolPickerInputValue
+      [formControl]="symbolPickerInput"
+      [matChipInputFor]="chipList"
+      [matAutocomplete]="auto"
+      (matChipInputTokenEnd)="addKeywordFromInput($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSymbolSelected($event, symbolPickerInputValue)">
+    <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
+      {{symbol}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

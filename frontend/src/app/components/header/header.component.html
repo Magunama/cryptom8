@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" fxLayout="row wrap">
+  <!--  todo: find a way to fit the page title-->
+  <a fxShow fxHide.md style="color: inherit; text-decoration: none" [routerLink]="['/']">{{getTitle()}}</a>
+  <span class="header-spacer"></span>
+  <button mat-flat-button color="primary" class="header-gap" [routerLink]="['/symbols']">Symbols</button>
+  <button mat-flat-button color="primary" class="header-gap" [routerLink]="['/models']">Models</button>
+  <button mat-flat-button color="primary" [routerLink]="['/history']">History</button>
+<!--  <button mat-icon-button>-->
+<!--    <mat-icon>settings</mat-icon>-->
+<!--  </button>-->
+</mat-toolbar>

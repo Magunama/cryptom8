@@ -1,0 +1,73 @@
+<ng-template #stepper>
+  <mat-stepper linear
+               class="symbols-stepper"
+               [orientation]="(stepperOrientation | async)!">
+
+    <!--    select algorithm -->
+    <mat-step id="firstFormGroup" [stepControl]="firstFormGroup" label="Select preferred algorithm">
+      <form [formGroup]="firstFormGroup">
+        <mat-radio-group
+          formControlName="selectAlgorithm"
+          aria-labelledby="firstFormGroup"
+          class="stepper-radio-group">
+          <mat-radio-button color="primary" class="stepper-radio-button"
+                            *ngFor="let alg of algorithmIds" [value]="alg">
+            {{algorithmEnum[alg]}}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!--    select prediction window-->
+    <mat-step id="secondFormGroup" [stepControl]="secondFormGroup" label="Select prediction window size">
+      <form [formGroup]="secondFormGroup">
+        <mat-radio-group
+          formControlName="selectPredictionWindow"
+          aria-labelledby="secondFormGroup"
+          class="stepper-radio-group">
+          <mat-radio-button color="primary" class="stepper-radio-button"
+                            *ngFor="let pw of predictionWindowIds" [value]="pw">
+            {{predictionWindowEnum[pw]}}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!--    select sequencing-->
+    <mat-step [stepControl]="thirdFormGroup" optional label="Toggle sequencing">
+      <form [formGroup]="thirdFormGroup">
+        <mat-slide-toggle color="primary" formControlName="enableSequencing">Enable sequencing?</mat-slide-toggle>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+          <p><strong>Note:</strong> Sequencing is ...</p>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done. Click 'Submit' to confirm settings.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="onStepperSubmit()">Submit</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</ng-template>
+
+
+<!--dialog logic is here-->
+<h1 mat-dialog-title>More details required</h1>
+<div mat-dialog-content>
+  <ng-container [ngTemplateOutlet]="stepper"></ng-container>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

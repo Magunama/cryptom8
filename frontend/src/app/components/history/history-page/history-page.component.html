@@ -1,0 +1,37 @@
+<ng-template #expPanels>
+  <h2>View predictions</h2>
+  <div *ngFor="let pred of predictions">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{pred.symbolName}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{pred.created}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <p>Result: {{predictionResultEnum[pred.result]}}</p>
+        <p>Confidence: {{(pred.confidence * 100).toFixed(2)}}%</p>
+      </ng-template>
+    </mat-expansion-panel>
+  </div>
+
+</ng-template>
+
+<mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="onSelectedIndexChange($event)">
+  <mat-tab label="Binance">
+    <ng-template matTabContent>
+      <app-history-selector [symbols]="[]"></app-history-selector>
+      <ng-container [ngTemplateOutlet]="expPanels"></ng-container>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Yahoo Finance">
+    <ng-template matTabContent>
+      <app-history-selector [symbols]="[]"></app-history-selector>
+      <ng-container [ngTemplateOutlet]="expPanels"></ng-container>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+<mat-divider></mat-divider>

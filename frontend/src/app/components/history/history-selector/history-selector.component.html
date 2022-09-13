@@ -1,0 +1,42 @@
+<!--Symbol select filter-->
+<mat-form-field appearance="outline">
+  <mat-label>Filter by symbol</mat-label>
+  <mat-select [formControl]="selectedSymbols" multiple>
+    <mat-select-trigger>
+      {{selectedSymbols.value?.[0] || ''}}
+      <span *ngIf="(selectedSymbols.value?.length || 0) > 1" class="select-additional-selection">
+        (+{{(selectedSymbols.value?.length || 0) - 1}} {{selectedSymbols.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let symb of symbols" [value]="symb">{{symb}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!--Algorithm select filter-->
+<mat-form-field appearance="outline">
+  <mat-label>Filter by algorithm</mat-label>
+  <mat-select [formControl]="selectedAlgorithms" multiple>
+    <mat-select-trigger>
+      {{algorithmIdToEnumName(selectedAlgorithms.value?.[0]) || ''}}
+      <span *ngIf="(selectedAlgorithms.value?.length || 0) > 1" class="select-additional-selection">
+        (+{{(selectedAlgorithms.value?.length || 0) - 1}} {{selectedAlgorithms.value?.length === 2 ? 'other' : 'others'}}
+        )
+      </span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let alg of algorithmIds" [value]="alg">{{algorithmIdToEnumName(alg)}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!--Result select filter-->
+<mat-form-field appearance="outline">
+  <mat-label>Filter by result</mat-label>
+  <mat-select [formControl]="selectedResults" multiple>
+    <mat-select-trigger>
+      {{resultIdToEnumName(selectedResults.value?.[0]) || ''}}
+      <span *ngIf="(selectedResults.value?.length || 0) > 1" class="select-additional-selection">
+        (+{{(selectedResults.value?.length || 0) - 1}} {{selectedResults.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let res of resultIds" [value]="res">{{resultIdToEnumName(res)}}</mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,20 @@
+<!--<h2>Trending today / news as expansion panel</h2>-->
+
+<mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="onSelectedIndexChange($event)">
+  <mat-tab label="Binance">
+    <ng-template matTabContent>
+      <app-symbols-picker [symbols]="symbols" (symbolSelectedEvent)="onSymbolSelected($event)"
+                          (refreshSymbolsEvent)="onRefreshSymbols()"></app-symbols-picker>
+      <mat-divider></mat-divider>
+      <app-symbols-view [selectedSymbols]="selectedSymbols" [dataSource]="dataSource"></app-symbols-view>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Yahoo Finance">
+    <ng-template matTabContent>
+      <app-symbols-picker [symbols]="symbols" (symbolSelectedEvent)="onSymbolSelected($event)"
+                          (refreshSymbolsEvent)="onRefreshSymbols()"></app-symbols-picker>
+      <mat-divider></mat-divider>
+      <app-symbols-view [selectedSymbols]="selectedSymbols" [dataSource]="dataSource"></app-symbols-view>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
